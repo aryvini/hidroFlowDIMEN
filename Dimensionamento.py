@@ -84,9 +84,100 @@ def hidro_minimumDiameter(flowMax,pipeUsage=0.5,slopeMax=15/100,Ks=110):
 
     except Exception:
         print("Error during the calculation, modify the parameters and try again")
-    
         
     return (diameter*1000)
 
 
+def slopeMinH (flowMax, diameter, pipeUsage=0.5, Ks=110):
+    """Calculate the minimum possible slope according to the pipe usage percentage
+    Parameters:
+    flowMax[m³/s]: Maximum flow at the end of the project horizon
+    diamater[m]: Pipe diameter
+    pipeUsage[0 to 1]: Percentage of allowable area to flow, default 0.5
+    Ks: Rough coefficient, default=110 (PVC pipes)
+    ------------------------------------------------------------
+    Output:
+    Minimum slope [m/m]
+    """
+    ##Input checks
+    if pipeUsage<=0:
+        return "pipeUsage can't assume 0 neither negative value"
+    if pipeUsage>1:
+        return "pipeUsage can't be higher than 1"
+    if flowMax<=0:
+        return "Flow can't assume 0 neither negative value"
+    if diameter<=0:
+        return "diamter can't assume 0 neither negative value"
+    
 
+    theta = 2*acos(1-2*pipeUsage)
+
+    slope=((20.159*flowMax/(Ks*diameter**(8/3)))*((theta**(2/3))/(theta-sin(theta))**(5/3)))**2
+
+    return slope
+
+def slopeMinVELOCITY(flowSelfCLEAN, diameter, minVelocity=0.6, Ks=110):
+    """Calculate the minimum possible slope according to the minimum allowable velocity
+    Parameters:
+    flowSelfCLEAN[m³/s]: Minimum flow thats ensure pipe self cleaning
+    diamater[m]: Pipe diameter
+    minVelocity[m/s]: Minimum allowable velocity of the flow, default 0.6
+    Ks: Rough coefficient, default=110 (PVC pipes)
+    ------------------------------------------------------------
+    Output:
+    Minimum slope [m/m]
+    """
+
+    ##Input checks
+    if flowSelfCLEAN<=0:
+        return "flowSelfCLEAN can't assume 0 neither negative value"
+    if diameter<=0:
+        return "diameter can't assume 0 neither negative value"
+    if minVelocity<=0:
+        return "minVelocity can't assume 0 neither negative value"
+
+    #Theta function must be solved with rootfinder, since it is implicit
+    #Similar to the hidro_findTheta function
+    def findTheta(guess=0.1):
+        
+        func = lambda val: (8*flowSelfCLEAN/((diameter**2)*minVelocity))-(val-sin(val))
+
+        try:
+            result = fsolve(func,guess)
+        except Exception:
+            print("Error during the theta calculation")
+            print("Trying another initial guess")
+            guess=guess+0.2
+            findTheta(guess)
+        
+        if result[0] >= 2*pi: ##function domain [0,2pi]
+            return "Theta is higher than 2*pi, paramters error"
+        
+        if result[0] <=0:
+            return "Theta cant be 0 neither negativa"
+
+        return result[0]
+    
+    theta = findTheta()
+
+    slope=((20.159*flowSelfCLEAN/(Ks*diameter**(8/3)))*((theta**(2/3))/(theta-sin(theta))**(5/3)))**2
+
+    return slope
+
+
+def slopeMaxVELOCITY (flowMax, diameter, maxVelocity=0.6, Ks=110):
+    #function is equal to the slopeMinVELOCITY
+    #the changing parameters are the Maximum velocity and Flow
+    #then: Call the equivalent function
+    """Calculate the minimum possible slope according to the minimum allowable velocity
+    Parameters:
+    flowMax[m³/s]: Maximum flow at the end of the project horizon
+    diamater[m]: Pipe diameter
+    maxVelocity[m/s]: Max allowable velocity of the flow, default 0.6
+    Ks: Rough coefficient, default=110 (PVC pipes)
+    ------------------------------------------------------------
+    Output:
+    Minimum slope [m/m]
+    """
+    
+    return slopeMinVELOCITY(flowMax,diameter,maxVelocity,Ks)
