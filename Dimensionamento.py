@@ -58,7 +58,7 @@ def hidro_minimumDiameter(flowMax,pipeUsage=0.5,slopeMax=15/100,Ks=110):
     Parameters:
     flowMax[m³/s]: Maximum flow at the end of the project horizon
     pipeUsage[0 to 1]: Percentage of allowable area to flow default 0.5
-    slopeMax[m/m] = Maximum allowed slope of the pipe, default 15/100
+    slopeMax[m/m] = Maximum allowed pipe slope, default 15/100
     Ks: Rough coefficient, default=110 (PVC pipes)
     ------------------------------------------------------------
     Output:
