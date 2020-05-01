@@ -87,6 +87,11 @@ def hidro_minimumDiameter(flowMax,pipeUsage=0.5,slopeMax=15/100,Ks=110):
         
     return (diameter*1000)
 
+@xw.func
+@xw.arg('flowMax', doc="[m³/s]")
+@xw.arg('diameter', doc="Pipe Diameter [m]")
+@xw.arg('pipeUsage', doc="Percentage of allowable area to flow, default 0.5")
+@xw.arg('Ks', doc="Manning coefficient, default=100")
 
 def slopeMinH (flowMax, diameter, pipeUsage=0.5, Ks=110):
     """Calculate the minimum possible slope according to the pipe usage percentage
@@ -115,6 +120,12 @@ def slopeMinH (flowMax, diameter, pipeUsage=0.5, Ks=110):
     slope=((20.159*flowMax/(Ks*diameter**(8/3)))*((theta**(2/3))/(theta-sin(theta))**(5/3)))**2
 
     return slope
+
+@xw.func
+@xw.arg('flowSelfCLEAN', doc="Self Cleaning flow [m³/s]")
+@xw.arg('diameter', doc="Pipe Diameter [m]")
+@xw.arg('minVelocity', doc="Minimum allowable velocity of the flow")
+@xw.arg('Ks', doc="Manning coefficient, default=100")
 
 def slopeMinVELOCITY(flowSelfCLEAN, diameter, minVelocity=0.6, Ks=110):
     """Calculate the minimum possible slope according to the minimum allowable velocity
@@ -164,12 +175,17 @@ def slopeMinVELOCITY(flowSelfCLEAN, diameter, minVelocity=0.6, Ks=110):
 
     return slope
 
+@xw.func
+@xw.arg('flowSelfCLEAN', doc="Self Cleaning flow [m³/s]")
+@xw.arg('diameter', doc="Pipe Diameter [m]")
+@xw.arg('maxVelocity', doc="Max allowable velocity of the flow")
+@xw.arg('Ks', doc="Manning coefficient, default=100")
 
 def slopeMaxVELOCITY (flowMax, diameter, maxVelocity=0.6, Ks=110):
     #function is equal to the slopeMinVELOCITY
     #the changing parameters are the Maximum velocity and Flow
     #then: Call the equivalent function
-    """Calculate the minimum possible slope according to the minimum allowable velocity
+    """Calculate the maximum possible slope according to the maximum allowable velocity
     Parameters:
     flowMax[m³/s]: Maximum flow at the end of the project horizon
     diamater[m]: Pipe diameter
@@ -181,3 +197,4 @@ def slopeMaxVELOCITY (flowMax, diameter, maxVelocity=0.6, Ks=110):
     """
     
     return slopeMinVELOCITY(flowMax,diameter,maxVelocity,Ks)
+
