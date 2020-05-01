@@ -11,18 +11,17 @@ from scipy.optimize import fsolve
 ##hidro_firstSecondTHIRD
 
 @xw.func
-@xw.arg('flow', doc="Flow [m³/s]")
-@xw.arg('diameter', doc="Diameter in m")
-@xw.arg('slope', doc="slope m/m")
-@xw.arg('Ks', doc="Manning coefficient, default=100")
+@xw.arg('flow', doc="Flow throuh the pipe [m³/s]")
+@xw.arg('diameter', doc="Pipe diameter [m]")
+@xw.arg('Ks', doc="Manning coefficient, default=110")
 @xw.arg('guess', doc="First guess to start the root iteraction, default=0.2")
 def hidro_findTheta(flow, diameter, slope, Ks = 110, guess = 0.2):
     """Function to iteractive find a root of the theta expression
     Input all in SI units
     Parameters:
-    flow: m³/s
-    diameter: m
-    slope: m/m
+    flow[m³/s]: Flow through the pipe
+    diameter[m]: Pipe diameter
+    slope[m/m]: Pipe slope
     Ks: Rough coefficient, default=110 (PVC pipes)
     guess: First guess to start the root iteraction, default=0.2
     ------------------------------------------------------------
@@ -48,7 +47,7 @@ def hidro_findTheta(flow, diameter, slope, Ks = 110, guess = 0.2):
 
 
 @xw.func
-@xw.arg('flowMax', doc="[m³/s]")
+@xw.arg('flowMax', doc="Maximum flow at the end of the project horizon [m³/s]")
 @xw.arg('pipeUsage', doc="Percentage of allowable area to flow, default 0.5")
 @xw.arg('slopeMax', doc="Maximum allowed slope of the pipe, default 15/100")
 @xw.arg('Ks', doc="Manning coefficient, default=100")
@@ -88,10 +87,10 @@ def hidro_minimumDiameter(flowMax,pipeUsage=0.5,slopeMax=15/100,Ks=110):
     return (diameter*1000)
 
 @xw.func
-@xw.arg('flowMax', doc="[m³/s]")
-@xw.arg('diameter', doc="Pipe Diameter [m]")
+@xw.arg('flowMax', doc="Maximum flow at the end of the project horizon [m³/s]")
+@xw.arg('diameter', doc="Pipe diameter [m]")
 @xw.arg('pipeUsage', doc="Percentage of allowable area to flow, default 0.5")
-@xw.arg('Ks', doc="Manning coefficient, default=100")
+@xw.arg('Ks', doc="Manning coefficient, default=110")
 
 def hidro_slopeMinH (flowMax, diameter, pipeUsage=0.5, Ks=110):
     """Calculate the minimum possible slope according to the pipe usage percentage
@@ -125,7 +124,7 @@ def hidro_slopeMinH (flowMax, diameter, pipeUsage=0.5, Ks=110):
 @xw.arg('flowSelfCLEAN', doc="Self Cleaning flow [m³/s]")
 @xw.arg('diameter', doc="Pipe Diameter [m]")
 @xw.arg('minVelocity', doc="Minimum allowable velocity of the flow")
-@xw.arg('Ks', doc="Manning coefficient, default=100")
+@xw.arg('Ks', doc="Manning coefficient, default=110")
 
 def hidro_slopeMinVELOCITY(flowSelfCLEAN, diameter, minVelocity=0.6, Ks=110):
     """Calculate the minimum possible slope according to the minimum allowable velocity
@@ -181,7 +180,7 @@ def hidro_slopeMinVELOCITY(flowSelfCLEAN, diameter, minVelocity=0.6, Ks=110):
 @xw.arg('maxVelocity', doc="Max allowable velocity of the flow")
 @xw.arg('Ks', doc="Manning coefficient, default=100")
 
-def hidro_slopeMaxVELOCITY (flowMax, diameter, maxVelocity=0.6, Ks=110):
+def hidro_slopeMaxVELOCITY (flowMax, diameter, maxVelocity=3, Ks=110):
     #function is equal to the slopeMinVELOCITY
     #the changing parameters are the Maximum velocity and Flow
     #then: Call the equivalent function
@@ -189,7 +188,7 @@ def hidro_slopeMaxVELOCITY (flowMax, diameter, maxVelocity=0.6, Ks=110):
     Parameters:
     flowMax[m³/s]: Maximum flow at the end of the project horizon
     diamater[m]: Pipe diameter
-    maxVelocity[m/s]: Max allowable velocity of the flow, default 0.6
+    maxVelocity[m/s]: Max allowable velocity of the flow, default 3
     Ks: Rough coefficient, default=110 (PVC pipes)
     ------------------------------------------------------------
     Output:
