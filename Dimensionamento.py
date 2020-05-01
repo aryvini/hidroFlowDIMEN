@@ -13,6 +13,7 @@ from scipy.optimize import fsolve
 @xw.func
 @xw.arg('flow', doc="Flow throuh the pipe [m³/s]")
 @xw.arg('diameter', doc="Pipe diameter [m]")
+@xw.arg('slope', doc="Pipe slope [m/m]")
 @xw.arg('Ks', doc="Manning coefficient, default=110")
 @xw.arg('guess', doc="First guess to start the root iteraction, default=0.2")
 def hidro_findTheta(flow, diameter, slope, Ks = 110, guess = 0.2):
