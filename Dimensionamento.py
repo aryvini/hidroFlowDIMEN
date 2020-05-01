@@ -93,7 +93,7 @@ def hidro_minimumDiameter(flowMax,pipeUsage=0.5,slopeMax=15/100,Ks=110):
 @xw.arg('pipeUsage', doc="Percentage of allowable area to flow, default 0.5")
 @xw.arg('Ks', doc="Manning coefficient, default=100")
 
-def slopeMinH (flowMax, diameter, pipeUsage=0.5, Ks=110):
+def hidro_slopeMinH (flowMax, diameter, pipeUsage=0.5, Ks=110):
     """Calculate the minimum possible slope according to the pipe usage percentage
     Parameters:
     flowMax[m³/s]: Maximum flow at the end of the project horizon
@@ -127,7 +127,7 @@ def slopeMinH (flowMax, diameter, pipeUsage=0.5, Ks=110):
 @xw.arg('minVelocity', doc="Minimum allowable velocity of the flow")
 @xw.arg('Ks', doc="Manning coefficient, default=100")
 
-def slopeMinVELOCITY(flowSelfCLEAN, diameter, minVelocity=0.6, Ks=110):
+def hidro_slopeMinVELOCITY(flowSelfCLEAN, diameter, minVelocity=0.6, Ks=110):
     """Calculate the minimum possible slope according to the minimum allowable velocity
     Parameters:
     flowSelfCLEAN[m³/s]: Minimum flow thats ensure pipe self cleaning
@@ -176,12 +176,12 @@ def slopeMinVELOCITY(flowSelfCLEAN, diameter, minVelocity=0.6, Ks=110):
     return slope
 
 @xw.func
-@xw.arg('flowSelfCLEAN', doc="Self Cleaning flow [m³/s]")
+@xw.arg('flowMax', doc="Maximum flow at the end of the project horizon [m³/s]")
 @xw.arg('diameter', doc="Pipe Diameter [m]")
 @xw.arg('maxVelocity', doc="Max allowable velocity of the flow")
 @xw.arg('Ks', doc="Manning coefficient, default=100")
 
-def slopeMaxVELOCITY (flowMax, diameter, maxVelocity=0.6, Ks=110):
+def hidro_slopeMaxVELOCITY (flowMax, diameter, maxVelocity=0.6, Ks=110):
     #function is equal to the slopeMinVELOCITY
     #the changing parameters are the Maximum velocity and Flow
     #then: Call the equivalent function
@@ -196,5 +196,5 @@ def slopeMaxVELOCITY (flowMax, diameter, maxVelocity=0.6, Ks=110):
     Minimum slope [m/m]
     """
     
-    return slopeMinVELOCITY(flowMax,diameter,maxVelocity,Ks)
+    return hidro_slopeMinVELOCITY(flowMax,diameter,maxVelocity,Ks)
 
