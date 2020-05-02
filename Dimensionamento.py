@@ -16,7 +16,7 @@ from scipy.optimize import fsolve
 @xw.arg('slope', doc="Pipe slope [m/m]")
 @xw.arg('Ks', doc="Manning coefficient, default=110")
 @xw.arg('guess', doc="First guess to start the root iteraction, default=0.2")
-def hidro_findTheta(flow, diameter, slope, Ks = 110, guess = 0.2):
+def hidro_findTheta(flow, diameter, slope, Ks = 110, guess = 1):
     """Function to iteractive find a root of the theta expression
     Input all in SI units
     Parameters:
@@ -24,7 +24,7 @@ def hidro_findTheta(flow, diameter, slope, Ks = 110, guess = 0.2):
     diameter[m]: Pipe diameter
     slope[m/m]: Pipe slope
     Ks: Rough coefficient, default=110 (PVC pipes)
-    guess: First guess to start the root iteraction, default=0.2
+    guess: First guess to start the root iteraction, default=0.8
     ------------------------------------------------------------
     Output:
     angle in radians
@@ -39,7 +39,7 @@ def hidro_findTheta(flow, diameter, slope, Ks = 110, guess = 0.2):
         newguess = guess+0.2
         print ("The root can't be found, trying a different starting guess")
         print ("{}".format(newguess))
-        return hidro_findTheta(flow, diameter, slope, Ks = 100, guess = newguess)
+        return hidro_findTheta(flow, diameter, slope, Ks=Ks, guess = newguess)
 
     if result[0] >= 2*pi: ##function domain [0,2pi]
         return "Theta is higher than 2*pi, paramters error"
