@@ -1,3 +1,4 @@
-Dimensionamento.xlsm
+*.xlsm
+*xlsx
 Functions_test.ipynb
 __pycache__
