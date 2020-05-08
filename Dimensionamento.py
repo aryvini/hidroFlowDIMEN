@@ -160,18 +160,21 @@ def hidro_slopeMinVELOCITY(flowSelfCLEAN, diameter, minVelocity=0.6, Ks=110):
             print("Trying another initial guess")
             guess=guess+0.2
             findTheta(guess)
-        
-        if result[0] >= 2*pi: ##function domain [0,2pi]
-            return "Theta is higher than 2*pi, paramters error"
-        
-        if result[0] <=0:
-            return "Theta cant be 0 neither negativa"
 
         return result[0]
     
     theta = findTheta()
 
+    if theta >= 2*pi: ##function domain [0,2pi]
+        return "Theta is higher than 2*pi, paramters error"
+        
+    if theta <=0:
+        return "Theta cant be 0 neither negative"
+
     slope=((20.159*flowSelfCLEAN/(Ks*diameter**(8/3)))*((theta**(2/3))/(theta-sin(theta))**(5/3)))**2
+
+    if slope <= 0:
+        return "Negative slope, creteria can't be reached"
 
     return slope
 
