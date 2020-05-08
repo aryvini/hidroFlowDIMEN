@@ -1,4 +1,5 @@
 *.xlsm
-*xlsx
+*.xlsx
+*.txt
 Functions_test.ipynb
 __pycache__
