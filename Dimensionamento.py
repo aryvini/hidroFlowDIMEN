@@ -50,16 +50,18 @@ def hidro_findTheta(flow, diameter, slope, Ks = 110, guess = 1):
 @xw.func
 @xw.arg('flowMax', doc="Maximum flow at the end of the project horizon [m³/s]")
 @xw.arg('pipeUsage', doc="Percentage of allowable area to flow, default 0.5")
+@xw.arg('maxVelocity', doc="Max allowable velocity of the flow")
 @xw.arg('slopeMax', doc="Maximum allowed slope of the pipe, default 15/100")
 @xw.arg('Ks', doc="Manning coefficient, default=100")
 
-def hidro_minimumDiameter(flowMax,pipeUsage=0.5,slopeMax=15/100,Ks=110):
+def hidro_minimumDiameter(flowMax,pipeUsage=0.5,slopeMax=15/100,maxVelocity=3,Ks=110):
     """Calculates the minimum possible diameter according to maximum slope, flow and pipe usage
     Input all in SI units // Output: Minimum pipe diameter [milimeters]
     Parameters:
     flowMax[m³/s]: Maximum flow at the end of the project horizon
     pipeUsage[0 to 1]: Percentage of allowable area to flow default 0.5
-    slopeMax[m/m] = Maximum allowed pipe slope, default 15/100
+    slopeMax[m/m]: Maximum allowed pipe slope, default 15/100
+    maxVelocity[m/s] : Max allowable velocity of the flow, default 3m/s
     Ks: Rough coefficient, default=110 (PVC pipes)
     ------------------------------------------------------------
     Output:
@@ -80,12 +82,13 @@ def hidro_minimumDiameter(flowMax,pipeUsage=0.5,slopeMax=15/100,Ks=110):
 
     try:
         theta = 2*acos(1-2*pipeUsage)
-        diameter = ((20.159 * flowMax/(Ks*sqrt(slopeMax)))**(3/8))*(theta**(1/4)/(theta-sin(theta))**(5/8))
+        dVelocity = sqrt((8*flowMax)/(maxVelocity*(theta-sin(theta))))
+        dSlope = ((20.159 * flowMax/(Ks*sqrt(slopeMax)))**(3/8))*(theta**(1/4)/(theta-sin(theta))**(5/8))
 
     except Exception:
         print("Error during the calculation, modify the parameters and try again")
         
-    return (diameter*1000)
+    return (max(dVelocity,dSlope)*1000)
 
 @xw.func
 @xw.arg('flowMax', doc="Maximum flow at the end of the project horizon [m³/s]")
