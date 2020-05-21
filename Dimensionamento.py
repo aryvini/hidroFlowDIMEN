@@ -55,7 +55,7 @@ def hidro_findTheta(flow, diameter, slope, Ks = 110, guess = 1):
 
 def hidro_minimumDiameter(flowMax,pipeUsage=0.5,slopeMax=15/100,Ks=110):
     """Calculates the minimum possible diameter according to maximum slope, flow and pipe usage
-    Input all in SI units
+    Input all in SI units // Output: Minimum pipe diameter [milimeters]
     Parameters:
     flowMax[m³/s]: Maximum flow at the end of the project horizon
     pipeUsage[0 to 1]: Percentage of allowable area to flow default 0.5
