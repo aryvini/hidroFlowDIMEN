@@ -168,8 +168,8 @@ def hidro_slopeMinVELOCITY(flowSelfCLEAN, diameter, minVelocity=0.6, Ks=110):
     
     theta = findTheta()
 
-    if theta >= 2*pi: ##function domain [0,2pi]
-        return "Theta is higher than 2*pi, paramters error"
+    ##if theta >= 2*pi: ##function domain [0,2pi]
+    ##    return "Theta is higher than 2*pi, paramters error"
         
     if theta <=0:
         return "Theta cant be 0 neither negative"
