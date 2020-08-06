@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module Dimensionamento</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>Dimensionamento</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:d%3A%5Cary%5Cdocumentos%5Cpython%5Chidroflowdimen%5Cdimensionamento.py">d:\ary\documentos\python\hidroflowdimen\dimensionamento.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top><a href="xlwings.html">xlwings</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-acos"><strong>acos</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;arc&nbsp;cosine&nbsp;(measured&nbsp;in&nbsp;radians)&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-cos"><strong>cos</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;cosine&nbsp;of&nbsp;x&nbsp;(measured&nbsp;in&nbsp;radians).</tt></dd></dl>
+ <dl><dt><a name="-hidro_findTheta"><strong>hidro_findTheta</strong></a>(flow, diameter, slope, Ks=110, guess=1)</dt><dd><tt>Function&nbsp;to&nbsp;iteractive&nbsp;find&nbsp;a&nbsp;root&nbsp;of&nbsp;the&nbsp;theta&nbsp;expression<br>
+Input&nbsp;all&nbsp;in&nbsp;SI&nbsp;units<br>
+Parameters:<br>
+flow[m³/s]:&nbsp;Flow&nbsp;through&nbsp;the&nbsp;pipe<br>
+diameter[m]:&nbsp;Pipe&nbsp;diameter<br>
+slope[m/m]:&nbsp;Pipe&nbsp;slope<br>
+Ks:&nbsp;Rough&nbsp;coefficient,&nbsp;default=110&nbsp;(PVC&nbsp;pipes)<br>
+guess:&nbsp;First&nbsp;guess&nbsp;to&nbsp;start&nbsp;the&nbsp;root&nbsp;iteraction,&nbsp;default=0.8<br>
+------------------------------------------------------------<br>
+Output:<br>
+angle&nbsp;in&nbsp;radians</tt></dd></dl>
+ <dl><dt><a name="-hidro_minimumDiameter"><strong>hidro_minimumDiameter</strong></a>(flowMax, pipeUsage=0.5, slopeMax=0.15, maxVelocity=3, Ks=110)</dt><dd><tt>Calculates&nbsp;the&nbsp;minimum&nbsp;possible&nbsp;diameter&nbsp;according&nbsp;to&nbsp;maximum&nbsp;slope,&nbsp;flow&nbsp;and&nbsp;pipe&nbsp;usage<br>
+Input&nbsp;all&nbsp;in&nbsp;SI&nbsp;units&nbsp;//&nbsp;Output:&nbsp;Minimum&nbsp;pipe&nbsp;diameter&nbsp;[milimeters]<br>
+Parameters:<br>
+flowMax[m³/s]:&nbsp;Maximum&nbsp;flow&nbsp;at&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;project&nbsp;horizon<br>
+pipeUsage[0&nbsp;to&nbsp;1]:&nbsp;Percentage&nbsp;of&nbsp;allowable&nbsp;area&nbsp;to&nbsp;flow&nbsp;default&nbsp;0.5<br>
+slopeMax[m/m]:&nbsp;Maximum&nbsp;allowed&nbsp;pipe&nbsp;slope,&nbsp;default&nbsp;15/100<br>
+maxVelocity[m/s]&nbsp;:&nbsp;Max&nbsp;allowable&nbsp;velocity&nbsp;of&nbsp;the&nbsp;flow,&nbsp;default&nbsp;3m/s<br>
+Ks:&nbsp;Rough&nbsp;coefficient,&nbsp;default=110&nbsp;(PVC&nbsp;pipes)<br>
+------------------------------------------------------------<br>
+Output:<br>
+Minimum&nbsp;pipe&nbsp;diameter&nbsp;[milimeters]</tt></dd></dl>
+ <dl><dt><a name="-hidro_slopeMaxVELOCITY"><strong>hidro_slopeMaxVELOCITY</strong></a>(flowMax, diameter, maxVelocity=3, Ks=110)</dt><dd><tt>Calculate&nbsp;the&nbsp;maximum&nbsp;possible&nbsp;slope&nbsp;according&nbsp;to&nbsp;the&nbsp;maximum&nbsp;allowable&nbsp;velocity<br>
+Parameters:<br>
+flowMax[m³/s]:&nbsp;Maximum&nbsp;flow&nbsp;at&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;project&nbsp;horizon<br>
+diamater[m]:&nbsp;Pipe&nbsp;diameter<br>
+maxVelocity[m/s]:&nbsp;Max&nbsp;allowable&nbsp;velocity&nbsp;of&nbsp;the&nbsp;flow,&nbsp;default&nbsp;3<br>
+Ks:&nbsp;Rough&nbsp;coefficient,&nbsp;default=110&nbsp;(PVC&nbsp;pipes)<br>
+------------------------------------------------------------<br>
+Output:<br>
+Minimum&nbsp;slope&nbsp;[m/m]</tt></dd></dl>
+ <dl><dt><a name="-hidro_slopeMinH"><strong>hidro_slopeMinH</strong></a>(flowMax, diameter, pipeUsage=0.5, Ks=110)</dt><dd><tt>Calculate&nbsp;the&nbsp;minimum&nbsp;possible&nbsp;slope&nbsp;according&nbsp;to&nbsp;the&nbsp;pipe&nbsp;usage&nbsp;percentage<br>
+Parameters:<br>
+flowMax[m³/s]:&nbsp;Maximum&nbsp;flow&nbsp;at&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;project&nbsp;horizon<br>
+diamater[m]:&nbsp;Pipe&nbsp;diameter<br>
+pipeUsage[0&nbsp;to&nbsp;1]:&nbsp;Percentage&nbsp;of&nbsp;allowable&nbsp;area&nbsp;to&nbsp;flow,&nbsp;default&nbsp;0.5<br>
+Ks:&nbsp;Rough&nbsp;coefficient,&nbsp;default=110&nbsp;(PVC&nbsp;pipes)<br>
+------------------------------------------------------------<br>
+Output:<br>
+Minimum&nbsp;slope&nbsp;[m/m]</tt></dd></dl>
+ <dl><dt><a name="-hidro_slopeMinVELOCITY"><strong>hidro_slopeMinVELOCITY</strong></a>(flowSelfCLEAN, diameter, minVelocity=0.6, Ks=110)</dt><dd><tt>Calculate&nbsp;the&nbsp;minimum&nbsp;possible&nbsp;slope&nbsp;according&nbsp;to&nbsp;the&nbsp;minimum&nbsp;allowable&nbsp;velocity<br>
+Parameters:<br>
+flowSelfCLEAN[m³/s]:&nbsp;Minimum&nbsp;flow&nbsp;thats&nbsp;ensure&nbsp;pipe&nbsp;self&nbsp;cleaning<br>
+diamater[m]:&nbsp;Pipe&nbsp;diameter<br>
+minVelocity[m/s]:&nbsp;Minimum&nbsp;allowable&nbsp;velocity&nbsp;of&nbsp;the&nbsp;flow,&nbsp;default&nbsp;0.6<br>
+Ks:&nbsp;Rough&nbsp;coefficient,&nbsp;default=110&nbsp;(PVC&nbsp;pipes)<br>
+------------------------------------------------------------<br>
+Output:<br>
+Minimum&nbsp;slope&nbsp;[m/m]</tt></dd></dl>
+ <dl><dt><a name="-pow"><strong>pow</strong></a>(x, y, /)</dt><dd><tt>Return&nbsp;x**y&nbsp;(x&nbsp;to&nbsp;the&nbsp;power&nbsp;of&nbsp;y).</tt></dd></dl>
+ <dl><dt><a name="-sin"><strong>sin</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;sine&nbsp;of&nbsp;x&nbsp;(measured&nbsp;in&nbsp;radians).</tt></dd></dl>
+ <dl><dt><a name="-sqrt"><strong>sqrt</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;square&nbsp;root&nbsp;of&nbsp;x.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>pi</strong> = 3.141592653589793</td></tr></table>
+</body></html>
